@@ -1,11 +1,13 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+import userRouter from './routes/userRoutes.js'
 dotenv.config()  
 const app = express()
+app.use(express.json())
+app.use('/api/users/',userRouter)
 const MONGO_URI = process.env.MONGO_URI
 const PORT = process.env.PORT 
-
 mongoose.connect(MONGO_URI)
   .then(() => {
     app.listen(PORT, () => {
